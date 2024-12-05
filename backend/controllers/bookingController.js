@@ -24,7 +24,9 @@ const getBookingById = async (req, res) => {
 // CREATE a new booking
 const createBooking = async (req, res) => {
   try {
+  
     const booking = new Booking(req.body);
+    console.log(req.body);
     const savedBooking = await booking.save();
     res.status(201).json(savedBooking);
   } catch (err) {

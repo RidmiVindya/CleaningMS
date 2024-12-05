@@ -9,6 +9,7 @@ const {
 
 const router = express.Router();
 
+
 // CRUD Endpoints for Bookings
 router.get('/', getAllBookings);             // GET all bookings
 router.get('/:id', getBookingById);          // GET booking by ID
