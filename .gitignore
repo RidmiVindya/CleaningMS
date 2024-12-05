@@ -1,4 +1,12 @@
 # Node.js dependencies
 node_modules/
+
+# Build directories
 dist/
+build/
+
+# Environment variables
 .env
+
+# Vite-related files
+.vite/
