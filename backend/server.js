@@ -1,6 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require("cors");
 const dotenv = require('dotenv');
+const userRoutes = require("./routes/userRoutes");
 const bookingRoutes = require('./routes/bookingRoutes');
 const serviceRoutes = require('./routes/serviceRoutes');
 
@@ -9,6 +11,16 @@ const app = express();
 
 // Middleware to parse JSON requests
 app.use(express.json());
+
+// Enable CORS for all origins (You can restrict this to specific origins later for security)
+app.use(cors());
+
+// If you need to restrict CORS to specific origins, you can do it like this:
+// app.use(cors({
+//   origin: 'http://localhost:5173'  // Your frontend URL here
+// }));
+
+console.log("JWT_SECRET:", process.env.JWT_SECRET);
 
 // Connect MongoDB
 mongoose.connect(process.env.DB_URI, { dbName: "CleaningMS" })
@@ -21,6 +33,7 @@ mongoose.connect(process.env.DB_URI, { dbName: "CleaningMS" })
   });
 
 // Routes
+app.use("/api/users", userRoutes);
 app.use('/api/bookings', bookingRoutes); // Booking routes
 app.use('/api/services', serviceRoutes); // Service routes
 
